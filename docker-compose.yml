@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+  nextcloud_:
+  nextcloud_data:
+  nextcloud_apps:
+  nextcloud_config:
+  nextcloud_db:
+
+services:
+  db:
+    image: localhost:5000/mariadb:10.2.37
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - nextcloud_db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=12qw34er
+      - MYSQL_PASSWORD=12qw34er
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: localhost:5000/nextcloud:20.0.8-apache
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - db
+    volumes:
+      - nextcloud_:/var/www/html
+      - nextcloud_data:/var/www/html/data
+      - nextcloud_apps:/var/www/html/custom_apps
+      - nextcloud_config:/var/www/html/config
+    environment:
+      - MYSQL_PASSWORD=12qw34er
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - NEXTCLOUD_ADMIN_USER=ncadmin
+      - NEXTCLOUD_ADMIN_PASSWORD=12qw34er
+      - PHP_UPLOAD_LIMIT=2G
