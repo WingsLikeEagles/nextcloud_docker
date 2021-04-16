@@ -1,12 +1,5 @@
 version: '2'
 
-volumes:
-  nextcloud_:
-  nextcloud_data:
-  nextcloud_apps:
-  nextcloud_config:
-  nextcloud_db:
-
 services:
   db:
     image: localhost:5000/mariadb:10.2.37
@@ -21,7 +14,7 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: localhost:5000/nextcloud:20.0.8-apache
+    image: localhost:5000/nextcloud:21.0.0-apache
     restart: always
     ports:
       - 8080:80
