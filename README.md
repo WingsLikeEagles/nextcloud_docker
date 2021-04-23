@@ -6,7 +6,7 @@ This repo is for setting up NextCloud in Docker containers using Portainer-CE.
 You may want to follow my setup for Docker and Portainer with a local registry.  
 - https://github.com/WingsLikeEagles/Docker_Portainer_setup  
 It utilizes a local registry for version control and security.  
-Pull the NextCloud image, tag it, and push it to your local registry
+Pull the NextCloud image, tag it, and push it to your local registry  
 `docker pull nextcloud:21.0.0`  
 `docker tag nextcloud:21.0.0 localhost:5000/nextcloud:21.0.0`  
 `docker push localhost:5000/nextcloud:21.0.0`  
