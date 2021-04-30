@@ -1,5 +1,13 @@
 version: '2'
 
+volumes:
+  nextcloud_db:
+  nextcloud_:
+  nextcloud_data:
+  nextcloud_apps:
+  nextcloud_config:
+  nextcloud_haproxy:
+  
 services:
   db:
     image: localhost:5000/mariadb:10.2.37
@@ -16,8 +24,6 @@ services:
   app:
     image: localhost:5000/nextcloud:21.0.0-apache
     restart: always
-    ports:
-      - 8080:80
     links:
       - db
     volumes:
@@ -33,3 +39,13 @@ services:
       - NEXTCLOUD_ADMIN_USER=ncadmin
       - NEXTCLOUD_ADMIN_PASSWORD=12qw34er
       - PHP_UPLOAD_LIMIT=12G
+
+  haproxy:
+    image: localhost:5000/haproxy:2.3
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - app
+    volumes:
+      - nextcloud_haproxy:/usr/local/etc/haproxy
