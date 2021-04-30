@@ -12,9 +12,9 @@ Pull the NextCloud image, tag it, and push it to your local registry
 `docker push localhost:5000/nextcloud:21.0.0`  
 
 # HAProxy
-At this time you'll need to manually create the haproxy.cfg file and put it on the nextcloud_haproxy volume.  Also required is the `errors` folder which contains the 400's and 500's error messages.  This can be pulled from another running haproxy container.  Alternatively you can make your own image and copy in the cfg file.  This seems undesirable to me.
-`docker pull haproxy:2.3`
-`docker tag haproxy:2.3 localhost:5000/haproxy:2.3`
+At this time you'll need to manually create the haproxy.cfg file and put it on the nextcloud_haproxy volume.  Also required is the `errors` folder which contains the 400's and 500's error messages.  This can be pulled from another running haproxy container.  Alternatively you can make your own image and copy in the cfg file.  This seems undesirable to me.  
+`docker pull haproxy:2.3`  
+`docker tag haproxy:2.3 localhost:5000/haproxy:2.3`  
 `docker push localhost:5000/haproxy:2.3`
 
 # Create new Stack in Portainer
