@@ -44,7 +44,7 @@ services:
     image: localhost:5000/haproxy:2.3
     restart: always
     ports:
-      - 80:80
+      - 443:443
     links:
       - app
     volumes:
