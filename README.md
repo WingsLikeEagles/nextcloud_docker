@@ -1,7 +1,7 @@
 # nextcloud_docker
 Dockerized NextCloud https://github.com/nextcloud/docker  
 This repo is for setting up NextCloud in Docker containers using Portainer-CE.  
-At this time this example is just using HTTP (no S).  So don't use it over the Internet because your password will be exposed as well as your files and data.  You may want to add on <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> or another SSL certificate provider.  And make the necessary changes to the HAProxy services.
+This example includes instructions for making your own SSL certificate and key.  This is secure if you keep the key secure, and pay attention to the fingerprint.  You may want to add on <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> or another SSL certificate provider.  And make the necessary changes to the HAProxy services.  
 
 # Pre-requisites
 You may want to follow my setup for Docker and Portainer with a local registry.  
