@@ -20,6 +20,11 @@ Alternatively you can make your own image and copy in the cfg file.  This seems 
 `docker tag haproxy:2.3 localhost:5000/haproxy:2.3`  
 `docker push localhost:5000/haproxy:2.3`
 
+To edit the `haproxy.cfg` file you can run a centos (or other) container and map in the volumes containing the files.
+`docker run --name centos-editor --rm -v nextcloud_nextcloud_haproxy:/proxy -v certs:/certs -v nextcloud_nextcloud_config:/nc-config -it localhost:5000/centos:7.9.2009 /bin/bash`
+
+The command above maps in the haproxy volume to a folder `/proxy`, the certs volume to `/certs` (to generate SSL certs using openssl) (where you can store the private key so it will not be exposed to the stack, then copy the cert to the haproxy volume), nextcloud_config to `/nc-config` where you need to modify the array containing the listening fully qualified domain name (FQDN) and other settings if necessary.
+
 # Create new Stack in Portainer
 After you have Portainer setup and configured how you want it:  
 1. Create a new Stack  

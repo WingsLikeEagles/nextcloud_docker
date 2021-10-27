@@ -1,0 +1,26 @@
+global
+    log 127.0.0.1 local0
+    maxconn 4096
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    retries 3
+    option redispatch
+    maxconn 2000
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http-in
+    bind *:443 ssl crt /usr/local/etc/haproxy/yourdomain.com.pem
+    http-request redirect scheme https code 301 if !{ ssl_fc }
+    acl nextcloud-frontend hdr(host) -i localhost files.yourdomain.com
+    use_backend nextcloud-backend if nextcloud-frontend
+
+backend nextcloud-backend
+    balance roundrobin
+    option http-server-close
+    server nextcloud-server-1 app:80 check
