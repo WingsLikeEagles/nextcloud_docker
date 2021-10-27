@@ -40,5 +40,7 @@ After you have Portainer setup and configured how you want it:
 
 # Add host and protocol overwites to NextCloud config.php file
 You will need to adjust the configuration of NextCloud to ensure HTTPS is used.  The following two lines need to be added to the CONFIG array  
-```  'overwrite.cli.url' => 'https://files.roysdontech.com',
-  'overwriteprotocol' => 'https',```
+```
+  'overwrite.cli.url' => 'https://files.roysdontech.com',
+  'overwriteprotocol' => 'https',
+```
