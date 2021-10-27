@@ -39,8 +39,11 @@ After you have Portainer setup and configured how you want it:
 6. Click the `Deploy the Stack` button at the bottom.  
 
 # Add host and protocol overwites to NextCloud config.php file
-You will need to adjust the configuration of NextCloud to ensure HTTPS is used.  The following two lines need to be added to the CONFIG array  
+You will need to adjust the configuration of NextCloud to ensure HTTPS is used.  The following lines need to be added to the CONFIG array:  
 ```
+  array (
+    0 => 'files.roysdontech.com',
+  ),
   'overwrite.cli.url' => 'https://files.roysdontech.com',
   'overwriteprotocol' => 'https',
 ```
