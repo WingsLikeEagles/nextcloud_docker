@@ -21,7 +21,10 @@ Alternatively you can make your own image and copy in the cfg file.  This seems 
 `docker push localhost:5000/haproxy:2.3`
 
 ## Create a SSL Key for secure access using HTTPS protocol
-
+On a Linux host with OpenSSL installed you may have luck with this command to make a self-signed cert.  
+`openssl req -x509 -nodes -newkey rsa:2048 -keyout ./files.mydomain.com.pem -out ./files.mydomain.com.pem -days 365`  
+Copy this file, files.mydomain.com.pem, into the Docker volume for the HAProxy container.  
+This may be something like, `/var/lib/docker/volumes/mydomain_nextcloud_config/_data`  
 
 # Create new Stack in Portainer
 After you have Portainer setup and configured how you want it:  
