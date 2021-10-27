@@ -20,6 +20,9 @@ Alternatively you can make your own image and copy in the cfg file.  This seems 
 `docker tag haproxy:2.3 localhost:5000/haproxy:2.3`  
 `docker push localhost:5000/haproxy:2.3`
 
+## Create a SSL Key for secure access using HTTPS protocol
+
+
 # Create new Stack in Portainer
 After you have Portainer setup and configured how you want it:  
 1. Create a new Stack  
@@ -34,3 +37,8 @@ After you have Portainer setup and configured how you want it:
   c. Change the database name and user names as desired  
 5. Using the "Web Editor" Build method, paste in the modified docker-compose.yml  
 6. Click the `Deploy the Stack` button at the bottom.  
+
+# Add host and protocol overwites to NextCloud config.php file
+You will need to adjust the configuration of NextCloud to ensure HTTPS is used.  The following two lines need to be added to the CONFIG array  
+```  'overwrite.cli.url' => 'https://files.roysdontech.com',
+  'overwriteprotocol' => 'https',```
