@@ -41,15 +41,15 @@ After you have Portainer setup and configured how you want it:
 5. Using the "Web Editor" Build method, paste in the modified docker-compose.yml  
 6. Click the `Deploy the Stack` button at the bottom.  
 
-# Add host and protocol overwites to NextCloud config.php file
-This is not necessary if you use the proper environment variables in your Docker Compose file.  See the example in this repo.  The following lines are added to the docker-compose.yml file:  
+# Add host and protocol overwites to NextCloud config
+Option 1: Use the proper environment variables in your Docker Compose file.  See the example in this repo where these  lines are added to the docker-compose.yml file:  
 ```
       - NEXTCLOUD_TRUSTED_DOMAINS=files.mydomain.com  
       - OVERWRITEHOST=files.mydomain.com  
       - OVERWRITEPROTOCOL=https  
 ```
 
-You will need to adjust the configuration of NextCloud to ensure HTTPS is used.  The following lines need to be added to the CONFIG array:  
+Option 2: Manually adjust the configuration of NextCloud in the config.php file to ensure HTTPS is used.  The following lines need to be added to the CONFIG array:  
 ```
   'trusted_domains' =>
   array (
