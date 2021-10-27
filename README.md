@@ -55,6 +55,6 @@ Option 2: Manually adjust the configuration of NextCloud in the config.php file 
   array (
     0 => 'files.roysdontech.com',
   ),
-  'overwrite.cli.url' => 'https://files.roysdontech.com',
+  'overwrite.cli.url' => 'https://files.mydomain.com',
   'overwriteprotocol' => 'https',
 ```
