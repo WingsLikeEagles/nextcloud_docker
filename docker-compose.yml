@@ -39,12 +39,16 @@ services:
       - NEXTCLOUD_ADMIN_USER=ncadmin
       - NEXTCLOUD_ADMIN_PASSWORD=12qw34er
       - PHP_UPLOAD_LIMIT=12G
+      - NEXTCLOUD_TRUSTED_DOMAINS=files.mydomain.com
+      - OVERWRITEHOST=files.mydomain.com
+      - OVERWRITEPROTOCOL=https
 
   haproxy:
     image: localhost:5000/haproxy:2.3
     restart: always
     ports:
       - 80:80
+      - 443:443
     links:
       - app
     volumes:

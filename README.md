@@ -1,7 +1,7 @@
 # nextcloud_docker
 Dockerized NextCloud https://github.com/nextcloud/docker  
 This repo is for setting up NextCloud in Docker containers using Portainer-CE.  
-At this time this example is just using HTTP (no S).  So don't use it over the Internet because your password will be exposed as well as your files and data.  You may want to add on <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> or another SSL certificate provider.  And make the necessary changes to the HAProxy services.
+This example includes instructions for making your own SSL certificate and key.  This is secure if you keep the key secure, and pay attention to the fingerprint.  You may want to add on <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> or another SSL certificate provider.  And make the necessary changes to the HAProxy services.  
 
 # Pre-requisites
 You may want to follow my setup for Docker and Portainer with a local registry.  
@@ -20,6 +20,12 @@ Alternatively you can make your own image and copy in the cfg file.  This seems 
 `docker tag haproxy:2.3 localhost:5000/haproxy:2.3`  
 `docker push localhost:5000/haproxy:2.3`
 
+## Create a SSL Key for secure access using HTTPS protocol
+On a Linux host with OpenSSL installed you may have luck with this command to make a self-signed cert.  
+`openssl req -x509 -nodes -newkey rsa:2048 -keyout ./files.mydomain.com.pem -out ./files.mydomain.com.pem -days 365`  
+Copy this file, files.mydomain.com.pem, into the Docker volume for the HAProxy container.  
+This may be something like, `/var/lib/docker/volumes/mydomain_nextcloud_config/_data`  
+
 # Create new Stack in Portainer
 After you have Portainer setup and configured how you want it:  
 1. Create a new Stack  
@@ -34,3 +40,21 @@ After you have Portainer setup and configured how you want it:
   c. Change the database name and user names as desired  
 5. Using the "Web Editor" Build method, paste in the modified docker-compose.yml  
 6. Click the `Deploy the Stack` button at the bottom.  
+
+# Add host and protocol overwites to NextCloud config
+Option 1: Use the proper environment variables in your Docker Compose file.  See the example in this repo where these  lines are added to the docker-compose.yml file:  
+```
+      - NEXTCLOUD_TRUSTED_DOMAINS=files.mydomain.com  
+      - OVERWRITEHOST=files.mydomain.com  
+      - OVERWRITEPROTOCOL=https  
+```
+
+Option 2: Manually adjust the configuration of NextCloud in the config.php file to ensure HTTPS is used.  The following lines need to be added to the CONFIG array:  
+```
+  'trusted_domains' =>
+  array (
+    0 => 'files.roysdontech.com',
+  ),
+  'overwrite.cli.url' => 'https://files.roysdontech.com',
+  'overwriteprotocol' => 'https',
+```
