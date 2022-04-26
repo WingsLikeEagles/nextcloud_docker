@@ -8,17 +8,17 @@ You may want to follow my setup for Docker and Portainer with a local registry.
 - https://github.com/WingsLikeEagles/Docker_Portainer_setup  
 It utilizes a local registry for version control and security.  
 Pull the NextCloud image, tag it, and push it to your local registry  
-`docker pull nextcloud:21.0.0`  
-`docker tag nextcloud:21.0.0 localhost:5000/nextcloud:21.0.0`  
-`docker push localhost:5000/nextcloud:21.0.0`  
+`docker pull nextcloud:23.0.3-apache`  
+`docker tag nextcloud:23.0.3-apache localhost:5000/nextcloud:23.0.3-apache`  
+`docker push localhost:5000/nextcloud:23.0.3-apache`  
 
 # HAProxy
 At this time you'll need to manually create the haproxy.cfg file and put it on the nextcloud_haproxy volume.  You'll need to change the line to reflect your domain replacing the `-i localhost` with `-i yourdomain.com`.  
 Also required is the `errors` folder which contains the 400's and 500's error messages.  This can be pulled from another running haproxy container.   
 Alternatively you can make your own image and copy in the cfg file.  This seems undesirable to me.  
-`docker pull haproxy:2.3`  
-`docker tag haproxy:2.3 localhost:5000/haproxy:2.3`  
-`docker push localhost:5000/haproxy:2.3`
+`docker pull haproxy:2.5.5`  
+`docker tag haproxy:2.5.5 localhost:5000/haproxy:2.5.5`  
+`docker push localhost:5000/haproxy:2.5.5`
 
 ## Create a SSL Key for secure access using HTTPS protocol
 On a Linux host with OpenSSL installed you may have luck with this command to make a self-signed cert.  
