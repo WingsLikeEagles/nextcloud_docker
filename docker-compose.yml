@@ -10,7 +10,7 @@ volumes:
   
 services:
   db:
-    image: localhost:5000/mariadb:10.2.37
+    image: localhost:5000/mariadb:11.1.3
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
@@ -22,7 +22,7 @@ services:
       - MYSQL_USER=nextcloud
 
   app:
-    image: localhost:5000/nextcloud:21.0.0-apache
+    image: localhost:5000/nextcloud:27.1.3-apache
     restart: always
     links:
       - db
@@ -44,7 +44,7 @@ services:
       - OVERWRITEPROTOCOL=https
 
   haproxy:
-    image: localhost:5000/haproxy:2.3
+    image: localhost:5000/haproxy:2.8.4
     restart: always
     ports:
       - 80:80
